@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
+app.use(express.json())
 
-const persons = [
+let persons = [
     { 
       "id": 1,
       "name": "Arto Hellas", 
@@ -24,8 +25,24 @@ const persons = [
     }
 ]
 
+const getRandomId = () => {
+    const MAX = 1000
+    return Math.floor(Math.random() * MAX)
+}
+
 app.get('/api/persons', (request, response) => {
     response.json(persons)
+})
+
+app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const person = persons.find(note => note.id === id)
+
+    if (person) {
+        response.json(person)
+    } else {
+        response.status(404).end()
+    }
 })
 
 app.get('/info', (request, response) => {
@@ -39,8 +56,25 @@ app.get('/info', (request, response) => {
         <p>${currentDate} (${timeZone})</p>
         `
     )
-
 })
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+    const newPerson = {
+        id: getRandomId(),
+        name: body.name,
+        number: body.number
+    }
+    persons.concat(newPerson)
+    response.json(body)
+})
+
+app.delete("/api/persons/:id", (request, response) => {
+    const id = Number(request.params.id)
+    persons = persons.filter(person => person.id !== id)
+
+    response.status(204).end()
+}
+)
 
 const PORT = 3001;
 app.listen(PORT)
