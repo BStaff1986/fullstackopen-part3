@@ -59,6 +59,22 @@ app.get('/info', (request, response) => {
 })
 app.post('/api/persons', (request, response) => {
     const body = request.body
+    
+
+    if (!body.name || !body.number) {
+        return response.status(400).json({
+            error: "Missing name or number"
+        })
+    }
+
+    const matchedNameCount = persons.filter(person => person.name === body.name).length
+    
+    if (matchedNameCount > 0) {
+        return response.status(400).json({
+            error: "Must use unique name"
+        })
+    }
+
     const newPerson = {
         id: getRandomId(),
         name: body.name,

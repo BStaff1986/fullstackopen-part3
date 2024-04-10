@@ -8,3 +8,29 @@ content-type: application/json
     "name": "Bryan",
     "number": "123456789"
 }
+
+###
+POST http://localhost:3001/api/persons/ 
+content-type: application/json
+
+{
+    "number": "123456789"
+}
+
+###
+POST http://localhost:3001/api/persons/ 
+content-type: application/json
+
+{
+    "name": "Bryan"
+}
+
+###
+// Non-unique name
+POST http://localhost:3001/api/persons/ 
+content-type: application/json
+
+{
+    "name": "Arto Hellas",
+    "number": "123456789"
+}
