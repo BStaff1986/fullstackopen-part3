@@ -9,8 +9,22 @@ GET http://localhost:3001/api/persons/
 GET http://localhost:3001/api/persons/661d90a0a7696cf8b148623c
 
 ###
+# Malformed ID to trigger error message
+GET http://localhost:3001/api/persons/{}
+
+###
 # Delete by ID
 DELETE http://localhost:3001/api/persons/661d90a0a7696cf8b148623c
+
+###
+# Update by ID
+PUT http://localhost:3001/api/persons/661d75e121af59eaea197274
+content-type: application/json
+
+{
+    "name": "Bryan S",
+    "number": "830-8929"
+}
 
 ###
 POST http://localhost:3001/api/persons/ 
