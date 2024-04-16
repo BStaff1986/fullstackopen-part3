@@ -1,6 +1,14 @@
 GET http://localhost:3001/api/info
 
 ###
+# Get all persons
+GET http://localhost:3001/api/persons/ 
+
+###
+# Get person by ID
+GET http://localhost:3001/api/persons/661d90a0a7696cf8b148623c
+
+###
 POST http://localhost:3001/api/persons/ 
 content-type: application/json
 
