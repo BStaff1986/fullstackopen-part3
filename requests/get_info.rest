@@ -27,12 +27,33 @@ content-type: application/json
 }
 
 ###
+# Valid POST submission
 POST http://localhost:3001/api/persons/ 
 content-type: application/json
 
 {
     "name": "Bryan",
-    "number": "123456789"
+    "number": "123-456789"
+}
+
+###
+# Invalid POST - Phone number is not long enough
+POST http://localhost:3001/api/persons/ 
+content-type: application/json
+
+{
+    "name": "Bryan",
+    "number": "123-45"
+}
+
+###
+# Invalid POST - Malformed phone number
+POST http://localhost:3001/api/persons/ 
+content-type: application/json
+
+{
+    "name": "Bryan",
+    "number": "10-22-334455"
 }
 
 ###
